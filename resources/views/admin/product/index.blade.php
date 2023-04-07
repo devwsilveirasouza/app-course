@@ -13,33 +13,33 @@
     </div>
 
     @if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{$message}}</p>
-    </div>
-
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
     @endif
 
     <table class="table table-bordered">
         <tr>
-            <th>ID</th>
+            {{-- <th>ID</th> --}}
+            <th>Código</th>
             <th>Imagem</th>
             <th>Produto</th>
             <th>Detalhes</th>
-            <th>Código</th>
             <th width="280px">Ação</th>
         </tr>
         @foreach ($products as $product)
             <tr>
-                <td>{{ ++$i }}</td>
+                {{-- <td>{{ $product->id }}</td> --}}
+                <td>{{ $product->bar_code }}</td>
                 <td><img src="/images/{{ $product->image }}" width="100px" height="50px"></td>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->detail }}</td>
-                <td>{{ $product->bar_code }}</td>
                 <td>
-                    <form action="" method="post">
-                        <a href="{{route('product.show', $product->id)}}" class="btn btn-info">Show</a>
+                    <form action="{{ route('product.destroy', $product->id) }}" method="POST">
 
-                        <a href="{{route('product.edit', $product->id)}}" class="btn btn-primary">Edit</a>
+                        <a href="{{ route('product.show', $product->id) }}" class="btn btn-info">Show</a>
+
+                        <a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary">Edit</a>
 
                         @csrf
                         @method('DELETE')
@@ -53,9 +53,4 @@
 @endsection
 
 @section('script')
-
-    <script>
-        console.log('Hi!');
-    </script>
-
 @endsection
