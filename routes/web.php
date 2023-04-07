@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StockController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 // ROTA INICIAL PADRÃO
 Route::get('/', HomeController::class)->name('home');
-
+// CADASTRO DE PRODUTOS
 Route::get('/product',                       [ProductController::class,'index'])->name('product.index');
 Route::get('/product-create',                [ProductController::class,'create'])->name('product.create');
 Route::post('/product-store',                [ProductController::class,'store'])->name('product.store');
@@ -24,3 +25,5 @@ Route::get('/product-show/{product}',        [ProductController::class,'show'])-
 Route::get('/product-edit/{product}',        [ProductController::class,'edit'])->name('product.edit');
 Route::put('/product-update/{product}',      [ProductController::class,'update'])->name('product.update');
 Route::delete('/product-delete/{product}',   [ProductController::class,'destroy'])->name('product.destroy');
+// CONTROLE DE ESTOQUE
+Route::get('/estoque',                       [StockController::class,'index'])->name('stock.index');
