@@ -39,18 +39,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // VALIDATION RULES
+        // REGRA DE VALIDAÇÃO
         $request->validate([
             'name'      => 'required',
             'detail'    => 'required',
             'image'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
+        // ATRIBUINDO OS DADOS A VARIÁVEL INPUT
         $input = $request->all();
-
+        // VERIFICA SE EXISTE O ARQUIVO
         if($image = $request->file('image')) {
+            // ATRIBUI O CAMINHO DA PASTA
             $destinationPath = 'images/';
+            // ATRIBUI A DATA DE UPLOAD E EXTRAI A EXTENÇÃO DO ARQUIVO
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            // REMOVE O ARQUIVO PARA O DIRETÓRIO COM OS DADOS ATRIBUIDOS A VARIÁVEL $profileImage
             $image->move($destinationPath, $profileImage);
             $input['image'] = "$profileImage";
         }
@@ -94,6 +97,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        // REGRA DE VALIDAÇÃO
         $request->validate([
             'name'      => 'required',
             'detail'    => 'required',
